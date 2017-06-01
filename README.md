@@ -22,3 +22,9 @@ pip install pybackup
 [Using Settings - GITHUB](https://github.com/FRReinert/PyBackup/blob/master/documentation/SETTINGS.md)
 
 [Example - GITHUB](https://github.com/FRReinert/PyBackup/tree/master/example)
+
+
+### Windows Tutorials
+
+[Task Scheduler](example\task_manager\schedule_windows.md)
+[Backup to network]()
