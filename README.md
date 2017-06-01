@@ -19,6 +19,6 @@ pip install pybackup
 ```
 ## How to use it
 
-[Using Settings - GITHUB](https://github.com/FRReinert/PyBackup/blob/dev/examples/example/SETTINGS.md)
+[Using Settings - GITHUB](documentation/SETTINGS.md)
 
-[Overriding Class - GITHUB](https://github.com/FRReinert/PyBackup/blob/dev/examples/example/OVERRIDING.md)
+[Example - GITHUB](example)
