@@ -6,22 +6,28 @@ sub_folder_name = strftime("%Y_%m_%d_%H%M%S", localtime())
 
 now = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
-backup_items = []
+backup_items = [
+	'c:/temp',
+	'c:/SQL/myDB.db3'
+]
 
-mailing_list = []
+mailing_list = [
+	'anyemail@contoso.com',
+	'dtrump@sux.com',
+]
 
 ignore_extensions = ['*.py','*.pyc', '*.log']
 
-target_folder = ''
+target_folder = 'c:/Backup'
 
 send_mail = True
 
 mail_settings = {
 	'server'		: 'smtp.live.com',
 	'port'			: 25,
-	'mail_address'	: '@live.com',
-	'username'		: '@live.com',
-	'password'		: '',
+	'mail_address'	: 'myemail@live.com',
+	'username'		: 'myemail@live.com',
+	'password'		: 'NeverForget@2017',
 	'tls'			: True,
 }
 
