@@ -31,7 +31,7 @@ mail_settings = {
 	'tls'			: True,
 }
 
-mail_subject = 'Backup System. {0}'
+mail_subject = 'Backup. {0}'
 
 mail_body = '''
 Backup System

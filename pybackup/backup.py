@@ -24,7 +24,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 
 from os import path, makedirs
-from sys import argv
 from shutil import copy, copytree, ignore_patterns
 from errno import ENOTDIR
 from . import utils 
@@ -36,42 +35,39 @@ class Backup():
 	'''
 
 	def __init__(self, verbose=False):
-		
-		# Initial attributes
-		try:
-			self.verbose 		= verbose
-			self.log 			= utils.LogSystem(verbose=verbose)
-			self.backup_list 	= []
-		
-		except BaseException as e: 
-			self.log.update_log(e)
-			raise BaseException(e)
+
+		self.verbose 		= verbose
+		self.log 			= utils.LogSystem(verbose=verbose)
+		self.backup_list 	= []
+
 		
 		# Check if settings.py is properly configured and import it
 		try:
 			from settings import backup_items, sub_folder_name, target_folder, ignore_extensions, now, mailing_list, send_mail, mail_body, mail_subject, mail_settings
 
-		except ImportError as e:
-			self.log.update_log('Settings file or attributes not found')
-			raise ImportError(e)
+		except:
+			msg = 'Check if <settings.py> is in your current folder'
+			self.log.update_log(msg)
+			raise BaseException(msg) from None
+			
 
 		else:
-			self.backupItems 		= backup_items
-			self.subfolderName 		= sub_folder_name
-			self.targetFolder 		= target_folder
-			self.ignoredExtensions 	= ignore_extensions
+			self.backup_itens 		= backup_items
+			self.sub_folder_name	= sub_folder_name
+			self.target_folder 		= target_folder
+			self.ignored_extensions	= ignore_extensions
 			self.now 				= now
-			self.sendMail 			= send_mail
+			self.send_mail 			= send_mail
 
 			# Only import if <send_mail> is set to True
 			if send_mail:
-				self.mailSubject 		= mail_subject
-				self.mailBody 			= mail_body
+				self.mail_subject 		= mail_subject
+				self.mail_body 			= mail_body
 				self.mail 				= utils.MailSystem(*mailing_list, **mail_settings)
 
 				# Check mailing list
-				if len(self.mail.excludedMails) > 0:
-					self.log.update_log('Invalid mail addresses detected: %s' % self.mail.excludedMails, 'INFO')
+				if len(self.mail.excluded_list) > 0:
+					self.log.update_log('Invalid mail addresses detected: %s' % self.mail.excluded_list, 'INFO')
 
 
 	def clean_list(self):
@@ -80,14 +76,14 @@ class Backup():
 		to backup
 		'''
 
-		# Case <backupItems> is empty 
-		if self.backupItems == []:
-			self.backup_list.append(path.abspath(path.dirname(argv[0])))
-
-			return None
+		# Case <backup_itens> is empty 
+		if self.backup_itens == []:
+			msg = "After version 0.0.4 <backup_itens> cannot be empty"
+			self.log.update_log(msg)
+			raise BaseException(msg) from None
 
 		# Add items
-		for item in self.backupItems:
+		for item in self.backup_itens:
 			if path.isfile(path.abspath(item)) or path.isdir(path.abspath(item)):
 				self.backup_list.append(path.abspath(item))
 			else:
@@ -99,7 +95,7 @@ class Backup():
 		Backup a single item 
 		'''
 		try:
-			copytree(source, destination, ignore=ignore_patterns(*self.ignoredExtensions))
+			copytree(source, destination, ignore=ignore_patterns(*self.ignored_extensions))
 		
 		except OSError as e:
 			if e.errno == ENOTDIR:
@@ -120,7 +116,7 @@ class Backup():
 		'''
 		Process every item from a <backup_list>
 		'''
-		default_dest = path.abspath(path.join(self.targetFolder, self.subfolderName))
+		default_dest = path.abspath(path.join(self.target_folder, self.sub_folder_name))
 
 		for item in self.backup_list:
 			if path.isdir(item):
@@ -142,9 +138,9 @@ class Backup():
 		self.process_list()
 
 		# Send email if configured to do so
-		if self.sendMail:
+		if self.send_mail:
 			
-			subject = self.mailSubject.format(self.now)
-			body = self.mailBody.format(self.now, self.backupItems, self.targetFolder)
+			subject = self.mail_subject.format(self.now)
+			body = self.mail_body.format(self.now, self.backup_itens, self.target_folder)
 			
 			self.mail.send(subject, body)

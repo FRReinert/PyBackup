@@ -5,7 +5,7 @@ from smtplib import SMTP, SMTPException
 from time import localtime, strftime
 from re import match, IGNORECASE
 
-def getDateTime():
+def get_date_time():
 	return strftime("%Y-%m-%d-%H:%M:%S", localtime())
 
 class LogSystem():
@@ -19,7 +19,7 @@ class LogSystem():
 		logging.basicConfig(filename='backup.log', level=logging.INFO)
 
 	def update_time(self):
-		self.now = getDateTime()
+		self.now = get_date_time()
 
 	def update_log(self, exception, type='ERROR'):
 		self.update_time()
@@ -47,15 +47,15 @@ class MailSystem():
 		
 
 		# Mailing List
-		self.mailingList = []
-		self.excludedMails = []
+		self.mailing_list = []
+		self.excluded_list = []
 
 		for item in self.mailing_list:
 			if match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", item, IGNORECASE):
-				self.mailingList.append(item)
+				self.mailing_list.append(item)
 			
 			else:
-				self.excludedMails.append(item)
+				self.excluded_list.append(item)
 
 		# Create SMTP object
 	
@@ -64,7 +64,7 @@ class MailSystem():
 		connect to SMTP server an return the SMTP object
 		'''
 		try:
-			SMTP_obj = SMTP(self.smtp_server, self.smtp_port)
+			stmp_obj = SMTP(self.smtp_server, self.smtp_port)
 		
 		except SMTPException as e:
 			raise "Could not create SMTP object: %s" % e
@@ -72,21 +72,21 @@ class MailSystem():
 		# StartTLS
 		if self.tls:
 			try:
-				SMTP_obj.ehlo()
-				SMTP_obj.starttls()
+				stmp_obj.ehlo()
+				stmp_obj.starttls()
 			
 			except SMTPException as e:
 				print("Could not open a TLS connection: %s" % e)
 
 		# login to SMTP
 		try:
-			SMTP_obj.ehlo()
-			SMTP_obj.login(self.username, self.pasword)
+			stmp_obj.ehlo()
+			stmp_obj.login(self.username, self.pasword)
 		
 		except SMTPException as e:
 			print("Could not logon: %s" % e)
 
-		return SMTP_obj
+		return stmp_obj
 
 	def send(self, subject, message):
 		'''
@@ -96,12 +96,12 @@ class MailSystem():
 		smtp = self.connect()
 
 		header  = 'from: %s\n' % self.mail_address
-		header += 'to: %s\n' % ','.join(self.mailingList)
+		header += 'to: %s\n' % ','.join(self.mailing_list)
 		header += 'subject: %s\n' % subject
 		message = header + '\r\n\r\n' + message
 
 		try:
-			smtp.sendmail(self.mail_address, self.mailingList, message)
+			smtp.sendmail(self.mail_address, self.mailing_list, message)
 			smtp.quit()
 		
 		except SMTPException as e:

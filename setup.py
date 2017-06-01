@@ -8,6 +8,9 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
+with open('HISTORY.md') as history_file:
+    history = history_file.read()
+
 requirements = ['']
 
 test_requirements = [
@@ -15,11 +18,11 @@ test_requirements = [
 ]
 
 setup(
-    name='PyBackup',
-    version='0.0.2',
+    name='pyBackup',
+    version='0.0.4',
     description=('Python module for Backup routines'
                  'of files and folders'),
-    long_description=readme,
+    long_description=readme + '\n\n' + history,
     author="Fabricio Roberto reinert",
     author_email='fabricio.reinert@live.com',
     url='https://github.com/FRReinert/PyBackup',

@@ -1,6 +1,13 @@
 
 # Created by https://www.gitignore.io/api/macos,linux,python,eclipse,pycharm,windows,sublimetext,visualstudio
 
+### Python Setup ###
+
+pyBackup.egg-info/
+dist/
+build/
+
+
 ### Eclipse ###
 
 .metadata
