@@ -19,6 +19,6 @@ pip install pybackup
 ```
 ## How to use it
 
-[Using Settings - GITHUB](documentation/SETTINGS.md)
+[Using Settings - GITHUB](https://github.com/FRReinert/PyBackup/blob/master/documentation/SETTINGS.md)
 
-[Example - GITHUB](example)
+[Example - GITHUB](https://github.com/FRReinert/PyBackup/tree/master/example)
