@@ -30,6 +30,7 @@ sub_folder_name = strftime("%Y_%m_%d_%H%M%S", localtime())
 ## now
 
 Used to persist the date/time on email body/subject placeholders and into the Logging system
+
 ```python
 from time import localtime, strftime 
 sub_folder_name = strftime("%Y_%m_%d_%H%M%S", localtime())
@@ -88,42 +89,75 @@ target_folder = "c:/temp/backup"
 
 ## ignore_extensions
 
+Use wildcards to exclude extensions, folders and files
+
+```python
+ignore_extensions = ['*.py','*.pyc']
+```
+## send_mail
+
+Boolean. Set it ```True``` if you want to send email after backup routine is completed
+
+```python
+send_mail = True
+```
+
 ## mailing_list
 
-## send_mail
+List containing e-mail adrresses which is going to be triggered when backup finishes
+
+```python
+mailing_list = [
+	'myemail@domain.com',
+	'another@email.com',
+	'other@one.com.br'
+]
+```
 
 ## mail_settings
 
-## mail_subject
+Setup your SMTP account to send emails. 
 
-## mail_body
-
-# Example of **settings.py**
+Example of Microsoft Live domain:
 
 ```python
-# -*- coding: utf-8 -*-
-from time import localtime, strftime 
-
-sub_folder_name = strftime("%Y_%m_%d_%H%M%S", localtime())
-now = strftime("%Y-%m-%d %H:%M:%S", localtime())
-backup_items = []
-mailing_list = []
-ignore_extensions = ['*.py','*.pyc', '*.log']
-target_folder = ''
-send_mail = True
 mail_settings = {
 	'server'		: 'smtp.live.com',
 	'port'			: 25,
-	'mail_address'	: '@live.com',
-	'username'		: '@live.com',
-	'password'		: '',
+	'mail_address'		: 'myemail@live.com',
+	'username'		: 'myemail@live.com',
+	'password'		: 'mypassword@2017',
 	'tls'			: True,
 }
+```
+
+## mail_subject
+
+Subject template of the email. 
+
+Tag | Return
+----|------------
+{0} | ```now```
+
+```python
 mail_subject = 'Backup System. {0}'
-mail_body = '''
-Backup System
+```
+
+## mail_body
+
+Body template of the email.
+
+Tag | Return
+----|------------
+{0} | ```now```
+{1} | ```directories```
+{2} | ```target_folder```
+
+```python
+mail_body = '''Backup System
 
 	Backup Performed at:	{0}
-	Backup Items:	{1}
+	Backup Items:		{1}
 	Destination folder:	{2}
 '''
+```
