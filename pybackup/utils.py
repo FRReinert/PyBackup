@@ -18,11 +18,11 @@ class LogSystem():
 		self.verbose = verbose
 		logging.basicConfig(filename='backup.log', level=logging.INFO)
 
-	def UpdateTime(self):
+	def update_time(self):
 		self.now = getDateTime()
 
-	def UpdateLog(self, exception, type='ERROR'):
-		self.UpdateTime()
+	def update_log(self, exception, type='ERROR'):
+		self.update_time()
 		msg = self.now+': '+exception
 		if type == 'ERROR':
 			logging.error(msg)
@@ -59,7 +59,7 @@ class MailSystem():
 
 		# Create SMTP object
 	
-	def Connect(self):
+	def connect(self):
 		'''
 		connect to SMTP server an return the SMTP object
 		'''
@@ -88,12 +88,12 @@ class MailSystem():
 
 		return SMTP_obj
 
-	def Send(self, subject, message):
+	def send(self, subject, message):
 		'''
 		Send email to mailing list
 		'''
 
-		smtp = self.Connect()
+		smtp = self.connect()
 
 		header  = 'from: %s\n' % self.mail_address
 		header += 'to: %s\n' % ','.join(self.mailingList)
