@@ -26,5 +26,6 @@ pip install pybackup
 
 ### Windows Tutorials
 
-[Task Scheduler](example\task_manager\schedule_windows.md)
+[Task Scheduler](https://github.com/FRReinert/PyBackup/blob/master/example/task_manager/schedule_windows.md)
+
 [Backup to network]()
