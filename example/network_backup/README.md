@@ -26,7 +26,7 @@ Open My Computer and check if the mapped drive is there.
 
 ## Done? Nooope! 
 
-now you have a mapped Drive, check the tutorial [Scheduling a Windows Task](https://github.com/FRReinert/PyBackup/tree/master/example/task_manager/README.md) to learn how to schedule a backup system
+Now you have a mapped Drive, check the tutorial [Scheduling a Windows Task](https://github.com/FRReinert/PyBackup/tree/master/example/task_manager) to learn how to schedule a backup system.
 
 Everything you'll need to do is change the **target_folder** to the drive you have mapped! 
 
