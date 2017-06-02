@@ -26,15 +26,16 @@ pip install pybackup
 
 ### Windows Tutorials
 
-[Task Scheduler](example\task_manager\README.md)
-[Backup to network](example\network_backup\README.md)
+[Task Scheduler](https://github.com/FRReinert/PyBackup/tree/master/example/task_manager)
+
+[Backup to network](https://github.com/FRReinert/PyBackup/tree/master/example/network_backup)
 
 ## Help me improve this project
 
 ### I'll love to have help on it!
 
 1. Fork the project
-2. create your branch
-	a. ```dev/bugs``` for bug fixing
-	b. ```dev/features``` for new features
-3. Commit and Pull to be annalysed!
+1. Create your branch
+   1. ```dev/bugs``` for bug fixing
+   1. ```dev/features``` for new features
+1. Commit and Pull to be annalysed!
