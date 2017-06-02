@@ -7,7 +7,7 @@ If so, this walktrough will help you with that...
 ## Setting up your script
 
 1. Create a folder on your preference
-2. Create your backup.py and settings.py file into this folder. My is looking like this:
+2. Create your backup.py and settings.py file into this folder. Mine looks like this:
 ![Settings.py](settings.PNG)
 ![backup.py](backup.PNG)
 3. Create a batch file, which looks like this
