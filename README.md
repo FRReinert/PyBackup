@@ -38,4 +38,4 @@ pip install pybackup
 1. Create your branch
    1. ```dev/bugs``` for bug fixing
    1. ```dev/features``` for new features
-1. Commit and Pull to be annalysed!
+1. Commit and Pull to be analysed!
